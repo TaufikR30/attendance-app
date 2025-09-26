@@ -5,6 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './common/guards/auth.guard';
 import { RolesGuard } from './common/guards/roles.guard';
 import { SiteContextMiddleware } from './common/middlewares/site-context';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
@@ -19,12 +21,16 @@ import { SiteContextMiddleware } from './common/middlewares/site-context';
       }),
     }),
   ],
-  controllers: [],
+  controllers: [AuthController],
+
   providers: [
     HttpClient,
     // Guards
     AuthGuard,
     RolesGuard,
+
+    // Services
+    AuthService,
   ],
 })
 export class AppModule implements NestModule {
